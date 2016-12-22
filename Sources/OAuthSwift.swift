@@ -106,6 +106,7 @@ extension OAuthSwift {
     /// MARK: callback alias
     public typealias TokenSuccess = (credential: OAuthSwiftCredential, response: OAuthSwiftResponse?, parameters: Parameters)
     public typealias TokenSuccessHandler = (_ credential: OAuthSwiftCredential, _ response: OAuthSwiftResponse?, _ parameters: Parameters) -> Void
+    public typealias SplitSuccessHandler = (_ parameters: Parameters) -> Void
     public typealias FailureHandler = (_ error: OAuthSwiftError) -> Void
     public typealias TokenRenewedHandler = (_ credential: OAuthSwiftCredential) -> Void
 }
