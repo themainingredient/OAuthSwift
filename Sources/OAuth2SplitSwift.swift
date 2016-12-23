@@ -87,19 +87,19 @@ open class OAuth2SplitSwift: OAuthSwift {
     queryString += "&redirect_uri=\(callbackURL.absoluteString.urlEncodedString)"
     queryString += "&response_type=\(self.responseType)"
     if !scope.isEmpty {
-      queryString += "&scope=\(scope)"
+      queryString += "&scope=\(scope.urlEncodedString)"
     }
     if !state.isEmpty {
-      queryString += "&state=\(state)"
+      queryString += "&state=\(state.urlEncodedString)"
     }
     for param in parameters {
-      queryString += "&\(param.0)=\(param.1)"
+      queryString += "&" + "\(param.0)".urlEncodedString + "=" + "\(param.1)".urlEncodedString
     }
 
     var urlString = self.authorizeUrl
     urlString += (self.authorizeUrl.contains("?") ? "&" : "?")
 
-    if let encodedQuery = queryString.urlQueryEncoded, let queryURL = URL(string: urlString + encodedQuery) {
+    if let queryURL = URL(string: urlString + queryString) {
       self.authorizeURLHandler.handle(queryURL)
       return self
     }

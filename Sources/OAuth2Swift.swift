@@ -118,34 +118,32 @@ open class OAuth2Swift: OAuthSwift {
             }
         }
 
-        
         var queryString = "client_id=\(self.consumerKey)"
         queryString += "&redirect_uri=\(callbackURL.absoluteString.urlEncodedString)"
         queryString += "&response_type=\(self.responseType)"
         if !scope.isEmpty {
-            queryString += "&scope=\(scope)"
+          queryString += "&scope=\(scope.urlEncodedString)"
         }
         if !state.isEmpty {
-            queryString += "&state=\(state)"
+          queryString += "&state=\(state.urlEncodedString)"
         }
         for param in parameters {
-            queryString += "&\(param.0)=\(param.1)"
+          queryString += "&" + "\(param.0)".urlEncodedString + "=" + "\(param.1)".urlEncodedString
         }
-        
+
         var urlString = self.authorizeUrl
         urlString += (self.authorizeUrl.contains("?") ? "&" : "?")
-        
-        if let encodedQuery = queryString.urlQueryEncoded, let queryURL = URL(string: urlString + encodedQuery) {
-            self.authorizeURLHandler.handle(queryURL)
-            return self
-        }
-        else {
-            self.cancel() // ie. remove the observer.
-            failure?(OAuthSwiftError.encodingError(urlString: urlString))
-            return nil
+
+        if let queryURL = URL(string: urlString + queryString) {
+          self.authorizeURLHandler.handle(queryURL)
+          return self
+        } else {
+          self.cancel() // ie. remove the observer.
+          failure?(OAuthSwiftError.encodingError(urlString: urlString))
+          return nil
         }
     }
-    
+
     @discardableResult
     open func authorize(withCallbackURL urlString: String, scope: String, state: String, parameters: Parameters = [:], headers: OAuthSwift.Headers? = nil, success: @escaping TokenSuccessHandler, failure: FailureHandler?) -> OAuthSwiftRequestHandle? {
         guard let url = URL(string: urlString) else {

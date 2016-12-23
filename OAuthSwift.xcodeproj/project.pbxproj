@@ -497,6 +497,7 @@
 				C4328F631DA1958D00847FA3 /* OAuthSwiftError.swift */,
 				F43502681A6790EC00038A29 /* OAuth1Swift.swift */,
 				F43502691A6790EC00038A29 /* OAuth2Swift.swift */,
+				936D14C81E0AD87700ACE177 /* OAuth2SplitSwift.swift */,
 				F435026A1A6790EC00038A29 /* OAuthSwiftClient.swift */,
 				F435026B1A6790EC00038A29 /* OAuthSwiftCredential.swift */,
 				F435026C1A6790EC00038A29 /* OAuthSwiftHTTPRequest.swift */,
@@ -509,7 +510,6 @@
 				F47599B21A7901DF004A96C1 /* HMAC.swift */,
 				C4F6FE7C1DCE3AC300C0B62A /* Objc.swift */,
 				C49624741B00F8240010BD09 /* Extensions */,
-				936D14C81E0AD87700ACE177 /* OAuth2SplitSwift.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
